@@ -31,16 +31,18 @@ module.exports = {
       config: {}
     }
   ],
-  "publisher": {
-    name: '@electron-forge/publisher-github',
-    config: {
-      repository: {
-        owner: 'me',
-        name: 'awesome-thing'
-      },
-      prerelease: true
+  "publishers": [
+    {
+      name: '@electron-forge/publisher-github',
+      config: {
+        repository: {
+          owner: 'bruce0205',
+          name: 'forge-dev'
+        },
+        prerelease: true
+      }
     }
-  },
+  ],
   plugins: [],
   hooks: [],
   buildIdentifier: process.env.IS_BETA ? 'beta' : 'prod'
