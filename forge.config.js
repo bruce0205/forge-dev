@@ -1,9 +1,10 @@
 const { utils: { fromBuildIdentifier } } = require('@electron-forge/core')
+const appName = 'pos-forge'
 
 module.exports = {
   packagerConfig: {
-    executableName: "meproz-forge",
-    name: "meproz-forge",
+    executableName: appName,
+    name: appName,
     appBundleId: fromBuildIdentifier({ beta: 'com.beta.app', prod: 'com.app' })
   },
   electronRebuildConfig: {},
@@ -11,8 +12,8 @@ module.exports = {
     {
       name: "@electron-forge/maker-squirrel",
       config: {
-        name: "forge_dev",
-        exe: "forge_dev.exe",
+        name: appName,
+        exe: `${appName}.exe`,
       }
     },
     {
