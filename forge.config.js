@@ -2,8 +2,8 @@ const { utils: { fromBuildIdentifier } } = require('@electron-forge/core')
 
 module.exports = {
   packagerConfig: {
-    executableName: "Folder Tagger",
-    name: "Folder Tagger",
+    executableName: "meproz-forge",
+    name: "meproz-forge",
     appBundleId: fromBuildIdentifier({ beta: 'com.beta.app', prod: 'com.app' })
   },
   electronRebuildConfig: {},
