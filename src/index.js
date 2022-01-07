@@ -50,16 +50,6 @@ const createWindow = () => {
 
   // Open the DevTools.
   if (isDev) mainWindow.webContents.openDevTools();
-
-  const dialogOpts = {
-    type: 'info',
-    buttons: ['Restart', 'Later'],
-    title: 'Application Update',
-    message: process.platform === 'win32' ? "hello win32" : "hello stranger",
-    detail: 'A new version has been downloaded. Restart the application to apply the updates.'
-  }
-
-  dialog.showMessageBox(dialogOpts)
 };
 
 // This method will be called when Electron has finished

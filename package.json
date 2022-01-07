@@ -8,7 +8,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "set GITHUB_TOKEN=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 && electron-forge publish",
+    "publish": "set GITHUB_TOKEN=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 && electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
   "keywords": [],
