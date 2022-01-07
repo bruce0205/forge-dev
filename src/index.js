@@ -1,5 +1,18 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, autoUpdater } = require('electron');
 const path = require('path');
+console.log("app.getVersion()", app.getVersion())
+
+// require('update-electron-app')({
+//   repo: 'bruce0205/forge-dev',
+//   updateInterval: '1 hour',
+//   logger: require('electron-log')
+// })
+
+const server = 'https://update.electronjs.org'
+const feed = `${server}/bruce0205/forge-dev/${process.platform}-${process.arch}/${app.getVersion()}`
+
+autoUpdater.setFeedURL(feed)
+autoUpdater.checkForUpdates()
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
