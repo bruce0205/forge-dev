@@ -1,18 +1,37 @@
-const { app, BrowserWindow, autoUpdater } = require('electron');
+const { app, BrowserWindow, autoUpdater, dialog } = require('electron');
 const path = require('path');
+const isDev = require('electron-is-dev')
+
 console.log("app.getVersion()", app.getVersion())
+if (isDev) {
+	console.log('Running in development');
+} else {
+	console.log('Running in production');
+  const server = 'https://update.electronjs.org'
+  const feed = `${server}/bruce0205/forge-dev/${process.platform}-${process.arch}/${app.getVersion()}`
 
-// require('update-electron-app')({
-//   repo: 'bruce0205/forge-dev',
-//   updateInterval: '1 hour',
-//   logger: require('electron-log')
-// })
+  autoUpdater.setFeedURL(feed)
+  autoUpdater.checkForUpdates() 
+}
 
-const server = 'https://update.electronjs.org'
-const feed = `${server}/bruce0205/forge-dev/${process.platform}-${process.arch}/${app.getVersion()}`
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+  const dialogOpts = {
+    type: 'info',
+    buttons: ['Restart', 'Later'],
+    title: 'Application Update',
+    message: process.platform === 'win32' ? releaseNotes : releaseName,
+    detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+  }
 
-autoUpdater.setFeedURL(feed)
-autoUpdater.checkForUpdates()
+  dialog.showMessageBox(dialogOpts).then((returnValue) => {
+    if (returnValue.response === 0) autoUpdater.quitAndInstall()
+  })
+})
+
+autoUpdater.on('error', message => {
+  console.error('There was a problem updating the application')
+  console.error(message)
+})
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -30,7 +49,17 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  if (isDev) mainWindow.webContents.openDevTools();
+
+  const dialogOpts = {
+    type: 'info',
+    buttons: ['Restart', 'Later'],
+    title: 'Application Update',
+    message: process.platform === 'win32' ? "hello win32" : "hello stranger",
+    detail: 'A new version has been downloaded. Restart the application to apply the updates.'
+  }
+
+  dialog.showMessageBox(dialogOpts)
 };
 
 // This method will be called when Electron has finished

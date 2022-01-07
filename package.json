@@ -8,7 +8,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "set GITHUB_TOKEN=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 && electron-forge publish",
+    "publish": "set GITHUB_TOKEN=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 && electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "forge": "./forge.config.js"
   },
   "dependencies": {
+    "electron-is-dev": "^2.0.0",
     "electron-log": "^4.4.4",
     "electron-squirrel-startup": "^1.0.0",
     "update-electron-app": "^2.0.1"
