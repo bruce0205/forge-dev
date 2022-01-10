@@ -7,19 +7,18 @@ if (isDev) {
 	console.log('Running in development');
 } else {
 	console.log('Running in production');
-  const server = 'https://update.electronjs.org'
-  const feed = `${server}/bruce0205/forge-dev/${process.platform}-${process.arch}/${app.getVersion()}`
+  // const server = 'https://update.electronjs.org'
+  // const feed = `${server}/bruce0205/forge-dev/${process.platform}-${process.arch}/${app.getVersion()}`
 
-  // const server = 'https://hazel-dev-omega.vercel.app/'
-  // const url = `${server}/update/${process.platform}/${app.getVersion()}`
-  /*
-  const updaterFeedURL = {
+  const server = 'https://hazel-dev-omega.vercel.app/'
+  const url = `${server}/update/${process.platform}/${app.getVersion()}`
+  const feed = {
     provider: 'github',
-    owner: 'my-team',
-    repo: 'my-repo',
-    token: 'my-github-token',
+    owner: 'bruce0205',
+    repo: 'forge-dev',
+    token: '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',
   }
-  */
+  
 
   autoUpdater.setFeedURL(feed)
   autoUpdater.checkForUpdates() 
