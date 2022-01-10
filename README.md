@@ -1,6 +1,8 @@
 ## TODO
 + add github action
 + auto update
++ private release server
+  + https://hazel-dev-omega.vercel.app/
 
 
 ## resources

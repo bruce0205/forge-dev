@@ -20,7 +20,8 @@ module.exports = {
       name: "@electron-forge/maker-zip",
       platforms: [
         "darwin"
-      ]
+      ],
+      config: {}
     },
     {
       name: "@electron-forge/maker-deb",
@@ -31,7 +32,7 @@ module.exports = {
       config: {}
     }
   ],
-  "publishers": [
+  publishers: [
     {
       name: '@electron-forge/publisher-github',
       config: {
@@ -44,6 +45,6 @@ module.exports = {
     }
   ],
   plugins: [],
-  hooks: [],
+  hooks: {},
   buildIdentifier: process.env.IS_BETA ? 'beta' : 'prod'
 }

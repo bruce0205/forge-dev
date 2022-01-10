@@ -10,6 +10,17 @@ if (isDev) {
   const server = 'https://update.electronjs.org'
   const feed = `${server}/bruce0205/forge-dev/${process.platform}-${process.arch}/${app.getVersion()}`
 
+  // const server = 'https://hazel-dev-omega.vercel.app/'
+  // const url = `${server}/update/${process.platform}/${app.getVersion()}`
+  /*
+  const updaterFeedURL = {
+    provider: 'github',
+    owner: 'my-team',
+    repo: 'my-repo',
+    token: 'my-github-token',
+  }
+  */
+
   autoUpdater.setFeedURL(feed)
   autoUpdater.checkForUpdates() 
 }
