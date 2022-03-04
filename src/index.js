@@ -13,15 +13,17 @@ if (isDev) {
   const server = 'https://hazel-dev-omega.vercel.app/'
   const url = `${server}/update/${process.platform}/${app.getVersion()}`
   const feed = {
+    url,
     provider: 'github',
     owner: 'bruce0205',
     repo: 'forge-dev',
     token: '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',
+    private: true
   }
   
 
   autoUpdater.setFeedURL(feed)
-  autoUpdater.checkForUpdates() 
+  autoUpdater.checkForUpdates()
 }
 
 autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
