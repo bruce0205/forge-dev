@@ -1,7 +1,7 @@
 {
   "name": "forge-dev",
   "productName": "forge-dev",
-  "version": "1.0.1-beta.11",
+  "version": "1.0.1-beta.12",
   "description": "My Electron application description",
   "main": "src/index.js",
   "scripts": {
