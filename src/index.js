@@ -1,12 +1,17 @@
-const { app, BrowserWindow, autoUpdater, dialog } = require('electron');
+const { app, BrowserWindow, autoUpdater, dialog, ipcMain } = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev')
 
+const overseer = {
+  count: 0
+}
+
 console.log("app.getVersion()", app.getVersion())
+
 if (isDev) {
-	console.log('Running in development');
+  console.log('Running in development');
 } else {
-	console.log('Running in production');
+  console.log('Running in production');
   // const server = 'https://update.electronjs.org'
   // const feed = `${server}/bruce0205/forge-dev/${process.platform}-${process.arch}/${app.getVersion()}`
 
@@ -20,7 +25,6 @@ if (isDev) {
     token: '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',
     private: true
   }
-  
 
   autoUpdater.setFeedURL(feed)
   autoUpdater.checkForUpdates()
@@ -50,11 +54,19 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
   app.quit();
 }
 
+let mainWindow
+
 const createWindow = () => {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, 'preload.js')
+    },
+    // frame: false,          // 標題列不顯示
+    // transparent: true,     // 背景透明
+    // autoHideMenuBar: true  // 工具列不顯示
   });
 
   // and load the index.html of the app.
@@ -89,3 +101,27 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+ipcMain.on('main:is-dev', async (event, payload) => {
+  event.returnValue = isDev
+})
+
+ipcMain.on('main:app-version', async (event, payload) => {
+  event.returnValue = app.getVersion()
+})
+
+ipcMain.on('ping', function (event, payload) {
+  console.log('main:ping')
+  mainWindow.webContents.send('pong')
+  event.returnValue = ' return bbb '
+})
+
+ipcMain.on('main:increment-count', (event, payload) => {
+  console.log('main:increment-count')
+  overseer.count += 1
+})
+
+ipcMain.on('main:request-count', (event, payload) => {
+  console.log('main:request-count')
+  event.reply('preload:set-count', overseer.count)
+})
