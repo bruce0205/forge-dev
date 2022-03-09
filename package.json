@@ -8,8 +8,8 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "set GITHUB_TOKEN=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 && electron-forge publish",
-    "publish.mac": "GITHUB_TOKEN=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 npx electron-forge publish",
+    "publish": "set GITHUB_TOKEN=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 && electron-forge publish",
+    "publish.mac": "GITHUB_TOKEN=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 npx electron-forge publish",
     "lint": "echo \"No linting configured\""
   },
   "keywords": [],

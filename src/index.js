@@ -17,7 +17,7 @@ if (isDev) {
     provider: 'github',
     owner: 'bruce0205',
     repo: 'forge-dev',
-    token: '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',
+    token: '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',
     private: true
   }
   
