@@ -2,7 +2,7 @@ const { app, BrowserWindow, autoUpdater, dialog, ipcMain } = require('electron')
 const path = require('path');
 const isDev = require('electron-is-dev')
 const log = require('electron-log')
-const electronReload = require('electron-reload')
+const utility = require('./utility')
 
 require('electron-reload')(__dirname, {
   electron: path.join(process.cwd(), 'node_modules', '.bin', 'electron')
@@ -21,6 +21,10 @@ log.info(`process.cwd(): ${process.cwd()}`) // /Users/brucehsu/workspace/test-el
 
 const overseer = {
   count: 0
+}
+
+function initialize() {
+  utility.initConfig()
 }
 
 if (isDev) {
@@ -113,7 +117,11 @@ const createWindow = () => {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow);
+app.on('ready', () => {
+  initialize()
+  utility.setConfigByKey('hello', 'world')
+  createWindow()
+});
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
@@ -158,7 +166,7 @@ ipcMain.on('main:request-count', (event, payload) => {
   console.log('main:request-count')
   event.reply('preload:set-count', overseer.count)
 })
-ipcMain.on('main:preload', async (event, payload) => {
+ipcMain.on('main:get-env', async (event, payload) => {
   event.returnValue = {
     appVersion: app.getVersion(), // 1.0.2-test.0
     appName: app.getName(), // forge-dev
@@ -168,4 +176,8 @@ ipcMain.on('main:preload', async (event, payload) => {
     logsPath: app.getPath('logs'), // /Users/brucehsu/Library/Logs/forge-dev
     appPath: app.getAppPath() // /Users/brucehsu/workspace/test-electron/forge-dev
   }
+})
+
+ipcMain.on('main:get-config', (event, payload) => {
+  event.returnValue = utility.getConfig()
 })

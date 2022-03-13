@@ -21,9 +21,10 @@ contextBridge.exposeInMainWorld(
   'bridgeAPI',
   {
     preload: () => {
-      const config = ipcRenderer.sendSync('main:preload')
-      console.log('kkkk')
-      console.log(config)
+      const envs = ipcRenderer.sendSync('main:get-env')
+      const config = ipcRenderer.sendSync('main:get-config')
+      console.log('envs', envs)
+      console.log('config', config)
     },
     isDev: () => {
       console.log('preload:bridgeAPI:isDev')
