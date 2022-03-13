@@ -20,6 +20,11 @@ ipcRenderer.on('pong', function () {
 contextBridge.exposeInMainWorld(
   'bridgeAPI',
   {
+    preload: () => {
+      const config = ipcRenderer.sendSync('main:preload')
+      console.log('kkkk')
+      console.log(config)
+    },
     isDev: () => {
       console.log('preload:bridgeAPI:isDev')
       const isDev = ipcRenderer.sendSync('main:is-dev')

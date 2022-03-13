@@ -5,6 +5,7 @@ document.getElementById('incrementCount').addEventListener('click', () => {
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('renderer:DOMContentLoaded')
+  bridgeAPI.preload()
   bridgeAPI.updateCountDisplay()
   bridgeAPI.appVersion()
   bridgeAPI.isDev()

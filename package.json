@@ -3,7 +3,7 @@
   "productName": "forge-dev",
   "version": "1.0.2-test.0",
   "description": "My Electron application description",
-  "main": "src/index.js",
+  "main": "app/main/index.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
