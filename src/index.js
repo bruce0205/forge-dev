@@ -1,12 +1,18 @@
 const { app, BrowserWindow, autoUpdater, dialog, ipcMain } = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev')
+const log = require('electron-log')
+
+// log.transports.file.level = false;
+// log.transports.console.level = false;
+// log.transports.console.format = '{h}:{i}:{s} {text}'
+
+log.info('Hello, log');
+log.warn('Some problem appears');
 
 const overseer = {
   count: 0
 }
-
-console.log("app.getVersion()", app.getVersion())
 
 if (isDev) {
   console.log('Running in development');
@@ -29,6 +35,10 @@ if (isDev) {
   autoUpdater.setFeedURL(feed)
   autoUpdater.checkForUpdates()
 }
+
+autoUpdater.on('checking-for-update', () => {
+  console.log('checking-for-update....')
+})
 
 autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
   const dialogOpts = {
