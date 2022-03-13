@@ -2,6 +2,11 @@ const { app, BrowserWindow, autoUpdater, dialog, ipcMain } = require('electron')
 const path = require('path');
 const isDev = require('electron-is-dev')
 const log = require('electron-log')
+const electronReload = require('electron-reload')
+
+require('electron-reload')(__dirname, {
+  electron: path.join(process.cwd(), 'node_modules', '.bin', 'electron')
+});
 
 log.transports.file.level = true
 log.transports.console.level = true
@@ -86,7 +91,7 @@ let mainWindow
 const createWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 800,
+    width: 1200,
     height: 600,
     // icon: path.join(__static, 'icon.png'), // 開啟後工具列的 icon
     webPreferences: {
