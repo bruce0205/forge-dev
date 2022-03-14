@@ -4,10 +4,6 @@ const isDev = require('electron-is-dev')
 const log = require('electron-log')
 const utility = require('./utility')
 
-require('electron-reload')(__dirname, {
-  electron: path.join(process.cwd(), 'node_modules', '.bin', 'electron')
-});
-
 log.transports.file.level = true
 log.transports.console.level = true
 // log.transports.console.format = '{h}:{i}:{s} {text}'
@@ -27,6 +23,9 @@ function initialize() {
 
 if (isDev) {
   console.log('Running in development');
+  require('electron-reload')(__dirname, {
+    electron: path.join(process.cwd(), 'node_modules', '.bin', 'electron')
+  })
 } else {
   console.log('Running in production');
   // const server = 'https://update.electronjs.org'
