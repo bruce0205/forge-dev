@@ -99,7 +99,7 @@ const createWindow = () => {
     height: 600,
     // icon: path.join(__static, 'icon.png'), // 開啟後工具列的 icon
     webPreferences: {
-      preload: path.join(process.cwd(), 'app', 'preload', 'index.js')
+      preload: path.join(__dirname, '..', 'preload', 'index.js')
     },
     // frame: false,          // 標題列不顯示
     // transparent: true,     // 背景透明
@@ -107,7 +107,7 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(process.cwd(), 'app', 'renderer', 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, '..', 'renderer', 'index.html'));
 
   // Open the DevTools.
   if (isDev) mainWindow.webContents.openDevTools();
