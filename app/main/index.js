@@ -13,7 +13,7 @@ log.transports.console.level = true
 // log.transports.console.format = '{h}:{i}:{s} {text}'
 log.transports.file.maxSize = 5 * 1024 * 1024
 
-log.info('app is starting')
+log.info('========== app is starting ==========')
 log.info(`__dirname: ${__dirname}`) // /Users/brucehsu/workspace/test-electron/forge-dev/app/main
 log.info(`process.cwd(): ${process.cwd()}`) // /Users/brucehsu/workspace/test-electron/forge-dev
 
@@ -49,22 +49,26 @@ if (isDev) {
 
 /** autoUpdater start */
 autoUpdater.on('checking-for-update', () => {
-  console.log('checking-for-update....')
+  log.info('[autoUpdater][checking-for-update]')
 })
 // 有更新檔可下載
 autoUpdater.on('update-available', info => {
   // do something...
+  log.info('[autoUpdater][update-available]')
 })
 // 沒有更新檔可下載
 autoUpdater.on('update-not-available', info => {
   // do something...
+  log.info('[autoUpdater][update-not-available]')
 })
 // 下載進度，開始下載後會持續觸發此事件
 autoUpdater.on('download-progress', info => {
+  log.info('[autoUpdater][download-progress]')
   console.log(info.percent)
 })
 // 下載完成
 autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName, releaseDate, updateUrl, quitAndUpdate) => {
+  log.info('[autoUpdater][update-downloaded]')
   const dialogOpts = {
     type: 'info',
     buttons: ['Restart', 'Later'],
@@ -79,8 +83,7 @@ autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName, releaseDa
 })
 
 autoUpdater.on('error', message => {
-  console.error('There was a problem updating the application')
-  console.error(message)
+  log.info('[autoUpdater][error] ' + message)
 })
 /** autoUpdater end */
 
