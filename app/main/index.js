@@ -13,9 +13,7 @@ log.transports.console.level = true
 // log.transports.console.format = '{h}:{i}:{s} {text}'
 log.transports.file.maxSize = 5 * 1024 * 1024
 
-log.info('Hello, log');
-log.warn('Some problem appears');
-
+log.info('app is starting')
 log.info(`__dirname: ${__dirname}`) // /Users/brucehsu/workspace/test-electron/forge-dev/app/main
 log.info(`process.cwd(): ${process.cwd()}`) // /Users/brucehsu/workspace/test-electron/forge-dev
 
@@ -119,7 +117,6 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   initialize()
-  utility.setConfigByKey('hello', 'world')
   createWindow()
 });
 
@@ -180,4 +177,10 @@ ipcMain.on('main:get-env', async (event, payload) => {
 
 ipcMain.on('main:get-config', (event, payload) => {
   event.returnValue = utility.getConfig()
+})
+
+ipcMain.on('main:set-config', (event, payload) => {
+  log.info('[main:set-config]: ' + JSON.stringify(payload))
+  utility.setConfigByKey(payload.key, payload.value)
+  event.returnValue = { success: true }
 })

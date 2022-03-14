@@ -17,6 +17,11 @@ ipcRenderer.on('pong', function () {
   console.log('renderer:pong')
 })
 
+ipcRenderer.on('preload:set-count', (event, newCount) => {
+  console.log("preload:set-count")
+  document.getElementById('count').innerHTML = newCount
+})
+
 contextBridge.exposeInMainWorld(
   'bridgeAPI',
   {
@@ -25,6 +30,10 @@ contextBridge.exposeInMainWorld(
       const config = ipcRenderer.sendSync('main:get-config')
       console.log('envs', envs)
       console.log('config', config)
+    },
+    setConfig(key, value) {
+      const response = ipcRenderer.sendSync('main:set-config', { key, value })
+      console.log('response:', response)
     },
     isDev: () => {
       console.log('preload:bridgeAPI:isDev')
@@ -47,8 +56,3 @@ contextBridge.exposeInMainWorld(
     },
   }
 )
-
-ipcRenderer.on('preload:set-count', (event, newCount) => {
-  console.log("preload:set-count")
-  document.getElementById('count').innerHTML = newCount
-})

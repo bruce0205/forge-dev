@@ -9,4 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   bridgeAPI.updateCountDisplay()
   bridgeAPI.appVersion()
   bridgeAPI.isDev()
+  setTimeout(() => {
+    bridgeAPI.setConfig('cust', 'h001')
+  }, 6000)
 })
