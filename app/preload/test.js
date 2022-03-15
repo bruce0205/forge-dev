@@ -1,10 +1,6 @@
 const { ipcRenderer } = require('electron')
 
-ipcRenderer.on('pong', function () {
-  console.log('renderer:test:pong')
-})
-
-ipcRenderer.on('preload:test:set-count', (event, newCount) => {
+ipcRenderer.on('preload:set-count', (event, newCount) => {
   console.log("renderer:test:set-count")
   document.getElementById('count').innerHTML = newCount
 })

@@ -9,8 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
   test.updateCountDisplay()
   bridgeAPI.appVersion()
   bridgeAPI.isDev()
-  
+
+  setTimeout(() => {
+    bridgeAPI.deleteConfig('cust')
+  }, 3000)
   setTimeout(() => {
     bridgeAPI.setConfig('cust', 'h001')
-  }, 6000)
+  }, 1000)
 })

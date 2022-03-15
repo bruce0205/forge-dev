@@ -1,3 +1,4 @@
+
 const { ipcRenderer } = require('electron')
 
 module.exports = {
@@ -9,6 +10,10 @@ module.exports = {
   },
   setConfig(key, value) {
     const response = ipcRenderer.sendSync('main:set-config', { key, value })
+    console.log('response:', response)
+  },
+  deleteConfig(key) {
+    const response = ipcRenderer.sendSync('main:delete-config', { key })
     console.log('response:', response)
   },
   isDev: () => {

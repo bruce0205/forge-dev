@@ -1,10 +1,10 @@
 const { contextBridge, ipcRenderer } = require('electron')
 const test = require('./test')
-const app = require('./app')
+const config = require('./config')
 
 window.addEventListener('DOMContentLoaded', () => {
   console.log(ipcRenderer.sendSync('ping'))
-  // ipcRenderer.send('ping')
+
   const replaceText = (selector, text) => {
     const element = document.getElementById(selector)
     if (element) element.innerText = text
@@ -16,4 +16,8 @@ window.addEventListener('DOMContentLoaded', () => {
 })
 
 contextBridge.exposeInMainWorld('test', test)
-contextBridge.exposeInMainWorld('bridgeAPI', app)
+contextBridge.exposeInMainWorld('bridgeAPI', config)
+
+ipcRenderer.on('pong', function () {
+  console.log('pong')
+})
