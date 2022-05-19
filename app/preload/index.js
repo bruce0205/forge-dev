@@ -1,23 +1,15 @@
 const { contextBridge, ipcRenderer } = require('electron')
-const test = require('./test')
 const config = require('./config')
+const edc = require('./edc')
+const printer = require('./printer')
 
 window.addEventListener('DOMContentLoaded', () => {
   console.log(ipcRenderer.sendSync('ping'))
-
-  const replaceText = (selector, text) => {
-    const element = document.getElementById(selector)
-    if (element) element.innerText = text
-  }
-
-  for (const dependency of ['chrome', 'node', 'electron']) {
-    replaceText(`${dependency}-version`, process.versions[dependency])
-  }
 })
-
-contextBridge.exposeInMainWorld('test', test)
-contextBridge.exposeInMainWorld('bridgeAPI', config)
-
 ipcRenderer.on('pong', function () {
   console.log('pong')
 })
+
+contextBridge.exposeInMainWorld('configBridge', config)
+contextBridge.exposeInMainWorld('edcBridge', edc)
+contextBridge.exposeInMainWorld('printerBridge', printer)

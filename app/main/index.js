@@ -3,7 +3,10 @@ const path = require('path');
 const isDev = require('electron-is-dev')
 const log = require('electron-log')
 const config = require('./service/config')
-const test = require('./service/test')
+const printer = require('./service/printer')
+
+require('./service/edc')
+// require('../test/cathy')
 
 log.transports.file.level = true
 log.transports.console.level = true
@@ -81,30 +84,42 @@ const createWindow = () => {
     }
   });
 
-  mainWindow.loadFile(path.join(__dirname, '..', 'html', 'index.html'));
+  if (config.getConfig()['mode'] === 'dev') {
+    mainWindow.loadFile(path.join(__dirname, '..', 'html.dev', 'index.html'));
+    mainWindow.webContents.openDevTools({ mode: 'detach' })
+  } else if (isDev) {
+    mainWindow.loadURL('http://localhost:3000')
+    mainWindow.webContents.openDevTools({ mode: 'detach' })
+  } else {
+    mainWindow.loadFile(path.join(__dirname, '..', 'html', 'index.html'));
+  }
 };
 
 /** app event listener start */
 app.on('ready', () => {
   config.initConfig()
   createWindow()
-});
+})
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
-});
+})
 
 app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
-});
+})
 /** app event listener end */
 
 ipcMain.on('ping', function (event, payload) {
   console.log('ping')
-  mainWindow.webContents.send('pong')
-  event.returnValue = ' return ppp '
+  // mainWindow.webContents.send('pong')
+  event.returnValue = 'response from ipcMain'
 })
+
+// setInterval(() => {
+//   ipcMain.emit('pong')
+// }, 1000)
