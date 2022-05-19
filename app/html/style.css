@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+body {
+  font-family: "Roboto", "Microsoft JhengHei", "微軟正黑體", "Microsoft YaHei",
+    sans-serif;
+  overflow-y: overlay;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+/* Flex 樣式 */
+.justify-end {
+  justify-content: flex-end;
+}
+
+/* 整體輸入欄樣式 */
+input,
+select {
+  outline-color: #f2af44;
+}
+
+/* 字型大小變化 */
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 992px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1200px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+#print-iframe {
+  display: none;
+}
+
+@media print {
+  body> :not(#print-iframe) {
+    display: none;
+  }
+
+  #print-iframe {
+    display: block;
+  }
+}
+
+
+/* 滾動條樣式 */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background: rgba(100, 100, 100, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  border-radius: 2em;
+  background: rgba(100, 100, 100, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 100, 100, 0.3);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: rgba(100, 100, 100, 0.8);
+}
+
+.micro-scroll::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+}
+
+.micro-scroll::-webkit-scrollbar-track {
+  background: rgba(100, 100, 100, 0);
+}
+
+.micro-scroll::-webkit-scrollbar-thumb {
+  background: rgba(100, 100, 100, 0.04);
+}
+
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+img,
+svg {
+  vertical-align: middle;
+}
