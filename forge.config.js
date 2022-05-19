@@ -11,6 +11,9 @@ module.exports = {
   makers: [
     {
       name: "@electron-forge/maker-squirrel",
+      platforms: [
+        "win32"
+      ],
       config: {
         name: appName,
         exe: `${appName}.exe`,
@@ -21,14 +24,6 @@ module.exports = {
       platforms: [
         "darwin"
       ],
-      config: {}
-    },
-    {
-      name: "@electron-forge/maker-deb",
-      config: {}
-    },
-    {
-      name: "@electron-forge/maker-rpm",
       config: {}
     }
   ],
