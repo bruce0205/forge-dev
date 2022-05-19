@@ -38,9 +38,9 @@ module.exports = {
       config: {
         repository: {
           owner: 'bruce0205',
-          name: 'forge-dev'
-        },
-        prerelease: true
+          name: 'forge-dev',
+          draft: true
+        }
       }
     }
   ],
