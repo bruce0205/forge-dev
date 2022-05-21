@@ -8,9 +8,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "publish.mac": "GITHUB_TOKEN=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 npx electron-forge publish",
-    "lint": "echo \"No linting configured\""
+    "publish": "electron-forge publish"
   },
   "keywords": [],
   "author": {
