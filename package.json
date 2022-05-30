@@ -8,7 +8,8 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge publish"
+    "publish": "electron-forge publish",
+    "publish.mac": "GITHUB_TOKEN=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 npx electron-forge publish --enable-logging"
   },
   "keywords": [],
   "author": {
