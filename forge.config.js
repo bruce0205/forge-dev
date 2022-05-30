@@ -5,7 +5,8 @@ module.exports = {
   packagerConfig: {
     executableName: appName,
     name: appName,
-    appBundleId: fromBuildIdentifier({ beta: 'com.beta.app', prod: 'com.app' })
+    appBundleId: fromBuildIdentifier({ beta: 'com.beta.app', prod: 'com.app' }),
+    asar: true
   },
   electronRebuildConfig: {},
   makers: [
